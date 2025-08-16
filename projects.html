@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Daniel Cortes</title>
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function(){try{const s=localStorage.getItem('theme');const d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch{}})();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class'};</script>
+  <link rel="stylesheet" href="css/style.css?v=1" />
+</head>
+<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-[Inter]">
+  <header class="nav-blur border-b border-slate-200/60 dark:border-slate-700/60 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="font-extrabold">Daniel · Data</a>
+      <nav id="mobileMenu" class="hidden md:flex items-center gap-6">
+        <a href="projects.html" class="link">Projects</a>
+        <a href="resume.html" class="link">Resume</a>
+        <a href="certifications.html" class="link">Certifications</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="themeBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60">
+          <span id="sun" class="hidden">🌞</span><span id="moon">🌙</span>
+        </button>
+        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60 md:hidden" aria-expanded="false">☰</button>
+      </div>
+    </div>
+    <div class="md:hidden hidden" id="mobileDropdown">
+      <nav class="px-4 pb-3 flex flex-col gap-2">
+        <a href="projects.html" class="py-1">Projects</a>
+        <a href="resume.html" class="py-1">Resume</a>
+        <a href="certifications.html" class="py-1">Certifications</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-extrabold">Projects</h1>
+    <p class="mt-2 opacity-80">A selection of end-to-end analytics, modeling, dashboards and experiments.</p>
+
+    <!-- Carousel -->
+    <section id="projectCarousel" class="mt-8">
+      <div class="relative card shadow-soft p-2 bg-white/50 dark:bg-slate-800/50 overflow-hidden">
+        <div class="track flex transition-transform duration-500 will-change-transform">
+          <!-- Slide 1 -->
+          <article id="p1" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
+            <img src="assets/project-1.jpg" alt="Churn Analysis" class="w-full h-60 object-cover rounded-xl"
+                 onerror="this.src='https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop'">
+            <div>
+              <h3 class="text-xl font-bold">Customer Churn Analysis</h3>
+              <p class="mt-2 opacity-90">
+                Built a churn prediction pipeline (feature store + XGBoost) with cohort analysis.
+                Deployed insights to CRM; reduced churn by 5–8% in A/B test.
+              </p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                <li class="tag">Python</li><li class="tag">XGBoost</li><li class="tag">Airflow</li><li class="tag">SQL</li>
+              </ul>
+              <div class="mt-4 flex gap-3">
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Case Study</a>
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Repo</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 2 -->
+          <article id="p2" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
+            <img src="assets/project-2.jpg" alt="Sales Forecasting" class="w-full h-60 object-cover rounded-xl"
+                 onerror="this.src='https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=1200&auto=format&fit=crop'">
+            <div>
+              <h3 class="text-xl font-bold">Sales Forecasting</h3>
+              <p class="mt-2 opacity-90">
+                Hierarchical forecasting across categories/regions. ARIMA/Prophet + reconciliation.
+                Delivered weekly Power BI dashboards for leadership.
+              </p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                <li class="tag">Prophet</li><li class="tag">ARIMA</li><li class="tag">Power BI</li><li class="tag">DBT</li>
+              </ul>
+              <div class="mt-4 flex gap-3">
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Live Demo</a>
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Notebook</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 3 -->
+          <article id="p3" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
+            <img src="assets/project-3.jpg" alt="Pricing Optimization" class="w-full h-60 object-cover rounded-xl"
+                 onerror="this.src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1200&auto=format&fit=crop'">
+            <div>
+              <h3 class="text-xl font-bold">Pricing Optimization</h3>
+              <p class="mt-2 opacity-90">
+                Price elasticity modeling with Bayesian regression. Scenario explorer to maximize margin.
+              </p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                <li class="tag">Bayesian</li><li class="tag">Python</li><li class="tag">Optimization</li><li class="tag">Dash</li>
+              </ul>
+              <div class="mt-4 flex gap-3">
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Write-up</a>
+                <a href="#" class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Repo</a>
+              </div>
+            </div>
+          </article>
+        </div>     
+
+        <!-- Controls -->
+        <button class="prev absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 dark:bg-slate-800/70 border">‹</button>
+        <button class="next absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 dark:bg-slate-800/70 border">›</button>
+
+        <!-- Dots -->
+        <div class="dots absolute bottom-3 left-0 right-0 flex justify-center gap-2"></div>
+      </div>
+    </section>
+
+    <!-- Grid below the carousel -->
+    <section class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Repeat small cards if you want a full gallery -->
+      <a href="#p1" class="card shadow-soft p-4 bg-white/60 dark:bg-slate-800/60">
+        <h4 class="font-semibold">Cohort Retention Explorer</h4>
+        <p class="text-sm opacity-80 mt-1">Interactive cohort analysis with retention curves.</p>
+      </a>
+      <a href="#p2" class="card shadow-soft p-4 bg-white/60 dark:bg-slate-800/60">
+        <h4 class="font-semibold">Promotion Effect Uplift</h4>
+        <p class="text-sm opacity-80 mt-1">Causal impact to estimate true promo lift.</p>
+      </a>
+      <a href="#p3" class="card shadow-soft p-4 bg-white/60 dark:bg-slate-800/60">
+        <h4 class="font-semibold">SKU Replenishment</h4>
+        <p class="text-sm opacity-80 mt-1">Safety stock recommendations by volatility.</p>
+      </a>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 py-12 text-center opacity-80">
+    <small>© <span id="y"></span> Daniel Cortes. All rights reserved.</small>
+  </footer>
+
+  <script src="js/main.js?v=1" defer></script>
+</body>
+</html>
