@@ -1,3 +1,4 @@
+/* =============== Global =============== */
 :root {
   --accent: #14b8a6;          /* teal-500-ish */
   --bg-blur: rgba(255,255,255,.7);
@@ -5,128 +6,109 @@
 }
 
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } }
 
-body {
+body{
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background: color-mix(in oklab, var(--accent) 30%, transparent); }
+::selection{ background: color-mix(in oklab, var(--accent) 30%, transparent); }
 
+/* =============== Header blur =============== */
 .nav-blur { background: var(--bg-blur); }
 .dark .nav-blur { background: var(--bg-blur-dark); }
 @supports ((backdrop-filter: blur(0.001px)) or (-webkit-backdrop-filter: blur(0.001px))) {
   .nav-blur { backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); }
 }
 
+/* =============== Cards / badges / links =============== */
 .card { border-radius: 1rem; }
 .shadow-soft { box-shadow: 0 10px 30px rgba(2,6,23,.08); }
 .dark .shadow-soft { box-shadow: 0 10px 30px rgba(2,6,23,.35); }
 
-.tag {
-  font-size: .75rem; line-height: 1;
-  padding: .15rem .5rem; border-radius: 9999px;
-  background: rgba(20,184,166,.12); color: #0f766e; border: 1px solid rgba(20,184,166,.25);
+.tag{
+  font-size:.75rem; line-height:1;
+  padding:.15rem .5rem; border-radius:9999px;
+  background:rgba(20,184,166,.12); color:#0f766e; border:1px solid rgba(20,184,166,.25);
 }
-.dark .tag { background: rgba(20,184,166,.2); color: #99f6e4; border-color: rgba(153,246,228,.25); }
+.dark .tag{ background:rgba(20,184,166,.20); color:#99f6e4; border-color:rgba(153,246,228,.25); }
 
-.link { color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: 1.5px; }
-.link:hover { text-decoration: underline; }
-.link:focus-visible, a:focus-visible, button:focus-visible {
-  outline:2px solid var(--accent); outline-offset:2px; border-radius:.375rem;
-}
+.link{ color:var(--accent); text-underline-offset:2px; text-decoration-thickness:1.5px; }
+.link:hover{ text-decoration:underline; }
+.link:focus-visible, a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:.375rem; }
 
-/* Carousel dots */
-#projectCarousel .dots button {
+/* =============== Carousel dots =============== */
+#projectCarousel .dots button{
   width:10px; height:10px; border-radius:9999px;
-  background: rgba(15, 118, 110, .35); border: 1px solid rgba(15,118,110,.5);
+  background: rgba(15,118,110,.35); border:1px solid rgba(15,118,110,.5);
 }
-#projectCarousel .dots button.active { background: var(--accent); border-color: var(--accent); }
+#projectCarousel .dots button.active{ background:var(--accent); border-color:var(--accent); }
 
-/* Print-friendly resume */
-@media print {
-  header, footer, #themeBtn, #menuBtn { display: none !important; }
-  body { color: #000; }
-  .card { box-shadow: none !important; background: #fff !important; }
-}
-/* Link que hace “clickable” todo el slide */
-.stretched-link { position: absolute; inset: 0; z-index: 10; }
-.stretched-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 1rem; }
+/* =============== Stretched link & modal helpers =============== */
+.stretched-link { position:absolute; inset:0; z-index:10; }
+.stretched-link:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; border-radius:1rem; }
 
-/* Tema de proyecto: Puffin */
-.theme-puffin {
-  --accent: #f97316;             /* naranja pico */
-  --puffin-dark: #0f172a;        /* azul muy oscuro (fondo) */
-  --puffin-ocean: #0ea5e9;       /* azul océano */
-  --puffin-green: #16a34a;       /* verde musgo */
-}
+/* eleva botones encima del stretched-link */
+.actions-raise > a{ position:relative; z-index:20; }
 
-.puffin-hero {
-  /* “cápsula” */
-  width: min(620px, 92vw);
-  aspect-ratio: 1 / 2;
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(2, 6, 23, .35), inset 0 0 40px rgba(255,255,255,.25);
-  background: radial-gradient(100% 120% at 50% 10%, rgba(255,255,255,.35), transparent 60%);
-}
-.puffin-hero img { width: 100%; height: 100%; object-fit: cover; }
-.puffin-hero::after {
-  /* brillo vidrio */
-  content: ""; position: absolute; inset: 0; border-radius: inherit;
-  border: 1px solid rgba(255,255,255,.45);
-  background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.05) 35%, transparent 60%);
-  pointer-events: none;
-}
-/* ——— link que vuelve todo el slide “clickeable” ——— */
-.stretched-link { position: absolute; inset: 0; z-index: 10; }
-.stretched-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 1rem; }
-
-/* ——— MODAL verde ——— */
-.modal { position: fixed; inset: 0; display: grid; place-items: center; z-index: 70; }
-.modal-backdrop {
-  position: absolute; inset: 0;
-  background: rgba(2, 6, 23, .55); backdrop-filter: blur(4px);
-}
-.modal-panel {
-  position: relative; z-index: 1;
-  width: min(520px, 92vw);
-  border-radius: 1.25rem;
-  padding: 1rem 1rem 1.25rem;
+/* =============== Preview Modal (green) =============== */
+.modal{ position:fixed; inset:0; display:grid; place-items:center; z-index:70; }
+.modal.hidden{ display:none; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(2,6,23,.55); backdrop-filter:blur(4px); }
+.modal-panel{
+  position:relative; z-index:1; width:min(520px,92vw);
+  border-radius:1.25rem; padding:1rem 1rem 1.25rem;
   background:
     radial-gradient(120% 120% at 0% 0%, #22c55e22, transparent 60%),
     radial-gradient(120% 120% at 100% 0%, #0ea5e922, transparent 60%),
     linear-gradient(180deg, #0d1b1488, #0d1b14aa);
-  border: 1px solid rgba(34, 197, 94, .35);
-  color: #e6f9f0;
-  box-shadow: 0 20px 60px rgba(2,6,23,.45);
-  animation: pop .2s ease-out;
+  border:1px solid rgba(34,197,94,.35); color:#e6f9f0;
+  box-shadow:0 20px 60px rgba(2,6,23,.45); animation:pop .2s ease-out;
 }
-@keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.modal-close {
-  position: absolute; right: .75rem; top: .5rem;
-  background: #14532d; color: #e6f9f0;
-  border: 1px solid rgba(34,197,94,.35);
-  width: 32px; height: 32px; border-radius: .75rem;
-}
-.modal-close:hover { filter: brightness(1.15); }
-
-/* ——— cápsula en el modal (verde) ——— */
-.capsule-green {
-  width: min(440px, 85vw); margin-inline: auto;
-  aspect-ratio: 1 / 2; border-radius: 999px; overflow: hidden; position: relative;
-  box-shadow: 0 20px 60px rgba(2, 6, 23, .35), inset 0 0 40px rgba(255,255,255,.25);
-  background: radial-gradient(120% 120% at 50% 8%, rgba(255,255,255,.35), transparent 60%);
-}
-.capsule-green img { width: 100%; height: 100%; object-fit: cover; }
-.capsule-green::after {
-  content:""; position:absolute; inset:0; border-radius: inherit; pointer-events:none;
-  border: 1px solid rgba(255,255,255,.5);
-  background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.1) 30%, transparent 60%);
+@keyframes pop{ from{ transform:scale(.97); opacity:0; } to{ transform:scale(1); opacity:1; } }
+.modal-close{
+  position:absolute; right:.75rem; top:.5rem;
+  background:#14532d; color:#e6f9f0; border:1px solid rgba(34,197,94,.35);
+  width:32px; height:32px; border-radius:.75rem;
 }
 
-/* ——— accesibilidad ——— */
-.modal [href], .modal button { outline-offset: 3px; }
+/* Capsule in modal */
+.capsule-green{
+  width:min(440px,85vw); margin-inline:auto; aspect-ratio:1/2;
+  border-radius:999px; overflow:hidden; position:relative;
+  box-shadow:0 20px 60px rgba(2,6,23,.35), inset 0 0 40px rgba(255,255,255,.25);
+  background:radial-gradient(120% 120% at 50% 8%, rgba(255,255,255,.35), transparent 60%);
+}
+.capsule-green img{ width:100%; height:100%; object-fit:cover; }
+.capsule-green::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  border:1px solid rgba(255,255,255,.5);
+  background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.1) 30%, transparent 60%);
+}
+
+/* =============== Project theme (puffin page) =============== */
+.theme-puffin{
+  --accent:#f97316;      /* naranja pico */
+  --puffin-dark:#0f172a; /* dark slate */
+  --puffin-ocean:#0ea5e9;
+  --puffin-green:#16a34a;
+}
+.puffin-hero{
+  width:min(620px,92vw); aspect-ratio:1/2; border-radius:999px; overflow:hidden; position:relative;
+  box-shadow:0 20px 60px rgba(2,6,23,.35), inset 0 0 40px rgba(255,255,255,.25);
+  background:radial-gradient(100% 120% at 50% 10%, rgba(255,255,255,.35), transparent 60%);
+}
+.puffin-hero img{ width:100%; height:100%; object-fit:cover; }
+.puffin-hero::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; border:1px solid rgba(255,255,255,.45);
+  background:linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.05) 35%, transparent 60%);
+  pointer-events:none;
+}
+
+/* =============== Print tweaks =============== */
+@media print{
+  header, footer, #themeBtn, #menuBtn{ display:none !important; }
+  .card{ box-shadow:none !important; background:#fff !important; }
+}
