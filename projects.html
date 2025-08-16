@@ -45,26 +45,42 @@
     <section id="projectCarousel" class="mt-8">
       <div class="relative card shadow-soft p-2 bg-white/50 dark:bg-slate-800/50 overflow-hidden">
         <div class="track flex transition-transform duration-500 will-change-transform">
-          <!-- Slide 1 -->
-          <article id="p1" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
-            <img src="assets/project-1.jpg" alt="Churn Analysis" class="w-full h-60 object-cover rounded-xl"
-                 onerror="this.src='https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop'">
-            <div>
-              <h3 class="text-xl font-bold">Customer Churn Analysis</h3>
-              <p class="mt-2 opacity-90">
-                Built a churn prediction pipeline (feature store + XGBoost) with cohort analysis.
-                Deployed insights to CRM; reduced churn by 5–8% in A/B test.
-              </p>
-              <ul class="mt-3 flex flex-wrap gap-2">
-                <li class="tag">Python</li><li class="tag">XGBoost</li><li class="tag">Airflow</li><li class="tag">SQL</li>
-              </ul>
-              <div class="mt-4 flex gap-3">
-                <a href="#" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Case Study</a>
-                <a href="#" class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Repo</a>
-              </div>
-            </div>
-          </article>
 
+
+      
+         
+        <!-- Slide 1 -->
+        <article id="p1" class="min-w-full grid md:grid-cols-2 gap-4 p-4 relative group">
+          <!-- enlace que hace clic en TODO el slide -->
+          <a href="project-puffin.html" class="stretched-link" aria-label="Open project: Atlantic Puffin Flight Analysis"></a>
+        
+          <img src="assets/project-1.jpg" alt="Churn Analysis" class="w-full h-60 object-cover rounded-xl"
+            onerror="this.src='assets/puffin.jpg'">
+        
+          <div>
+            <h3 class="text-xl font-bold">Atlantic Puffin · Flight Analysis</h3>
+            <p class="mt-2 opacity-90">
+              Species-focused analytics: tracking flights, distances and seasonal activity for
+              the Atlantic Puffin (Fratercula arctica).
+            </p>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              <li class="tag">Python</li>
+              <li class="tag">Geo/Time Series</li>
+              <li class="tag">Dashboard</li>
+              <li class="tag">Charts</li>
+            </ul>
+            <div class="mt-4 flex gap-3">
+              <a href="project-puffin.html" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Open
+                Project</a>
+              <a href="project-puffin.html#dashboard"
+                class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Go to Dashboard</a>
+            </div>
+          </div>
+        </article>
+
+
+
+          
           <!-- Slide 2 -->
           <article id="p2" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
             <img src="assets/project-2.jpg" alt="Sales Forecasting" class="w-full h-60 object-cover rounded-xl"

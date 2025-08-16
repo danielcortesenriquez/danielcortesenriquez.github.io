@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-puffin">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atlantic Puffin · Flight Analysis</title>
+  <meta name="description" content="Atlantic Puffin (Fratercula arctica) — project page with species intro, capsule hero and an ocean-colored dashboard." />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- evita flash de tema -->
+  <script>
+    (function(){try{const s=localStorage.getItem('theme');const d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(_){}})();
+  </script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class'};</script>
+
+  <!-- estilos -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-[Inter]">
+
+  <!-- header básico -->
+  <header class="nav-blur border-b border-slate-200/60 dark:border-slate-700/60 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="font-extrabold">Daniel · Data</a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a class="link" href="projects.html">Projects</a>
+        <a class="link" href="resume.html">Resume</a>
+        <a class="link" href="certifications.html">Certifications</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO: cápsula con el frailecillo -->
+  <section class="relative overflow-hidden" style="background:
+      radial-gradient(700px 300px at 20% -10%, var(--puffin-ocean) 0%, transparent 60%),
+      radial-gradient(700px 300px at 80% 0%, var(--puffin-green) 0%, transparent 60%);">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight">Atlantic Puffin · Flight Analysis</h1>
+        <p class="mt-3 opacity-90">
+          The Atlantic puffin (<i>Fratercula arctica</i>) is a seabird known for its vivid beak and strong
+          flight over cold North Atlantic waters. In this project we explore its flight activity
+          (counts & distance) across seasons using telemetry-like samples and present a colorful dashboard.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="tag">Species analytics</span><span class="tag">Time series</span><span class="tag">Geospatial</span>
+        </div>
+        <a href="#dashboard" class="mt-6 inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white shadow-soft">Open Dashboard ↓</a>
+      </div>
+
+      <div class="mx-auto">
+        <figure class="puffin-hero">
+          <img src="assets/puffin.jpg" alt="Atlantic puffin on moss" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- About the species -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold">About the species</h2>
+    <p class="mt-2 opacity-90">
+      Puffins breed on coastal cliffs and islands, feeding mainly on small fish.
+      Their bright beak colors intensify during breeding season. We’ll analyze “flights”
+      as observed events to estimate seasonal activity and total distance flown.
+    </p>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="max-w-6xl mx-auto px-4 py-10">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-bold">Dashboard</h2>
+      <span class="text-sm opacity-75">Palette inspired by the puffin beak and ocean</span>
+    </div>
+
+    <!-- KPIs -->
+    <div class="mt-6 grid sm:grid-cols-3 gap-4">
+      <div class="card shadow-soft p-5 bg-white/70 dark:bg-slate-800/70">
+        <div class="text-sm opacity-80">Total recorded flights</div>
+        <div id="kpiFlights" class="text-3xl font-extrabold mt-1">—</div>
+      </div>
+      <div class="card shadow-soft p-5 bg-white/70 dark:bg-slate-800/70">
+        <div class="text-sm opacity-80">Estimated distance (km)</div>
+        <div id="kpiDistance" class="text-3xl font-extrabold mt-1">—</div>
+      </div>
+      <div class="card shadow-soft p-5 bg-white/70 dark:bg-slate-800/70">
+        <div class="text-sm opacity-80">Peak month</div>
+        <div id="kpiPeak" class="text-3xl font-extrabold mt-1">—</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="mt-6 grid lg:grid-cols-3 gap-6">
+      <div class="card shadow-soft p-4 bg-white/70 dark:bg-slate-800/70 lg:col-span-2">
+        <h3 class="font-semibold">Flights per month</h3>
+        <canvas id="chartFlights" height="120"></canvas>
+      </div>
+      <div class="card shadow-soft p-4 bg-white/70 dark:bg-slate-800/70">
+        <h3 class="font-semibold">Distance buckets</h3>
+        <canvas id="chartDistance" height="120"></canvas>
+      </div>
+    </div>
+
+    <div class="mt-6 card shadow-soft p-4 bg-white/70 dark:bg-slate-800/70">
+      <h3 class="font-semibold">Notes</h3>
+      <p class="opacity-85 text-sm mt-1">
+        Replace the sample arrays in the script with your real data (telemetry, observations, etc.).
+        Colors follow puffin palette: orange (#f97316), ocean blue (#0ea5e9), deep slate (#0f172a), moss green (#16a34a).
+      </p>
+    </div>
+  </section>
+
+  <footer class="max-w-6xl mx-auto px-4 py-12 text-center opacity-80">
+    <small>© <span id="y"></span> Daniel Cortes. All rights reserved.</small>
+  </footer>
+
+  <!-- Chart.js solo en esta página -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // ---------- Sample data (cámbialo por tus datos reales) ----------
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    // vuelos/mes (ejemplo)
+    const flightsMonthly = [12,18,22,35,60,90,110,95,70,40,20,14];
+    // distancias en km (ejemplo por bucket)
+    const distBuckets = { '<10km': 32, '10–30km': 58, '30–60km': 44, '>60km': 12 };
+
+    // KPIs
+    const totalFlights = flightsMonthly.reduce((a,b)=>a+b,0);
+    const avgDist = (10*32 + 20*58 + 45*44 + 70*12) // estimación media por bucket
+    const totalDist = Math.round(avgDist);
+    const peakIndex = flightsMonthly.indexOf(Math.max(...flightsMonthly));
+    document.getElementById('kpiFlights').textContent = totalFlights.toLocaleString();
+    document.getElementById('kpiDistance').textContent = totalDist.toLocaleString();
+    document.getElementById('kpiPeak').textContent = months[peakIndex];
+
+    // Paleta puffin
+    const cOrange = '#f97316';
+    const cOcean  = '#0ea5e9';
+    const cDark   = '#0f172a';
+    const cGreen  = '#16a34a';
+
+    // Chart defaults
+    Chart.defaults.font.family = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, sans-serif';
+    Chart.defaults.color = getComputedStyle(document.documentElement).classList.contains('dark') ? '#e5e7eb' : '#0f172a';
+
+    // Line: flights per month
+    new Chart(document.getElementById('chartFlights'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Flights',
+          data: flightsMonthly,
+          borderColor: cOrange,
+          backgroundColor: 'rgba(249, 115, 22, .15)',
+          tension: .35,
+          fill: true
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(15, 23, 42, .1)' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // Doughnut: distance buckets
+    new Chart(document.getElementById('chartDistance'), {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(distBuckets),
+        datasets: [{
+          data: Object.values(distBuckets),
+          backgroundColor: [cOrange, cOcean, cGreen, cDark],
+          borderWidth: 0
+        }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } }, cutout: '60%' }
+    });
+  </script>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
