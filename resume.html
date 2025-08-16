@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume · Daniel Cortes</title>
+  <meta name="color-scheme" content="light dark">
+  <script>(function(){try{const s=localStorage.getItem('theme');const d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch{}})();</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class'};</script>
+  <link rel="stylesheet" href="css/style.css?v=1" />
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-[Inter]">
+  <header class="nav-blur border-b border-slate-200/60 dark:border-slate-700/60 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="font-extrabold">Daniel · Data</a>
+      <nav id="mobileMenu" class="hidden md:flex items-center gap-6">
+        <a href="projects.html" class="link">Projects</a>
+        <a href="resume.html" class="link">Resume</a>
+        <a href="certifications.html" class="link">Certifications</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="themeBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60">
+          <span id="sun" class="hidden">🌞</span><span id="moon">🌙</span>
+        </button>
+        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60 md:hidden" aria-expanded="false">☰</button>
+      </div>
+    </div>
+    <div class="md:hidden hidden" id="mobileDropdown">
+      <nav class="px-4 pb-3 flex flex-col gap-2">
+        <a href="projects.html" class="py-1">Projects</a>
+        <a href="resume.html" class="py-1">Resume</a>
+        <a href="certifications.html" class="py-1">Certifications</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <div class="card shadow-soft p-8 bg-white dark:bg-slate-800 print:shadow-none print:p-0">
+      <header class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+        <div>
+          <h1 class="text-3xl font-extrabold leading-tight">Daniel Cortes</h1>
+          <p class="opacity-80">Data Analyst · Business Intelligence · Analytics Engineering</p>
+        </div>
+        <div class="opacity-80 text-sm">
+          <a class="link" href="mailto:you@email.com">you@email.com</a> ·
+          <a class="link" href="#" target="_blank">LinkedIn</a> ·
+          <a class="link" href="#" target="_blank">GitHub</a> ·
+          Guadalajara, MX
+        </div>
+      </header>
+
+      <section class="mt-6">
+        <h2 class="font-bold text-xl">Summary</h2>
+        <p class="mt-2">
+          Data analyst with experience building analytics products end-to-end: data modeling, pipelines,
+          and stakeholder-friendly dashboards. Passionate about decision science and experimentation.
+        </p>
+      </section>
+
+      <section class="mt-6 grid sm:grid-cols-2 gap-6">
+        <div>
+          <h2 class="font-bold text-xl">Experience</h2>
+          <div class="mt-3 space-y-4">
+            <div>
+              <div class="flex items-baseline justify-between">
+                <b>Analytics Specialist · Qualmex</b>
+                <span class="text-sm opacity-70">2024–Present</span>
+              </div>
+              <ul class="list-disc list-inside mt-1 opacity-90">
+                <li>Built KPI dashboards used weekly by leadership (+time-to-insight).</li>
+                <li>Automated ETL with Airflow & DBT; standardized metrics.</li>
+                <li>Partnered with ops & finance on ad-hoc analysis and A/B tests.</li>
+              </ul>
+            </div>
+            <!-- Add more roles -->
+          </div>
+        </div>
+        <div>
+          <h2 class="font-bold text-xl">Education</h2>
+          <div class="mt-3">
+            <b>B.S. in Computer Science Engineering</b>
+            <div class="opacity-80">University Center of CuTonalá</div>
+          </div>
+
+          <h2 class="font-bold text-xl mt-6">Core Skills</h2>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span>
+            <span class="tag">Power BI</span><span class="tag">DBT</span><span class="tag">Airflow</span>
+            <span class="tag">Git</span><span class="tag">Statistics</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-6">
+        <h2 class="font-bold text-xl">Selected Projects</h2>
+        <ul class="mt-2 grid sm:grid-cols-2 gap-4">
+          <li class="card shadow-soft p-4 bg-white/60 dark:bg-slate-800/60">
+            <b>Churn Prediction</b>
+            <p class="text-sm opacity-80 mt-1">Feature store + XGBoost pipeline; campaign targeting.</p>
+          </li>
+          <li class="card shadow-soft p-4 bg-white/60 dark:bg-slate-800/60">
+            <b>Forecasting Suite</b>
+            <p class="text-sm opacity-80 mt-1">Hierarchical forecasting; weekly leadership reports.</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="mt-6 text-sm opacity-80">
+      <button onclick="window.print()" class="px-4 py-2 rounded-xl border">Print / Save as PDF</button>
+    </div>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 py-12 text-center opacity-80">
+    <small>© <span id="y"></span> Daniel Cortes. All rights reserved.</small>
+  </footer>
+
+  <script src="js/main.js?v=1" defer></script>
+</body>
+</html>

@@ -1,94 +1,152 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mi Portafolio de Ciencia de Datos</title>
-  <meta name="description" content="Portafolio de Ciencia de Datos: proyectos, dashboards y demos interactivos." />
-  <meta name="color-scheme" content="light dark">
+  <title>Daniel Cortes · Data & Analytics Portfolio</title>
+  <meta name="description" content="Data analyst portfolio: projects, resume, certifications, interactive demos." />
+  <meta name="color-scheme" content="light dark" />
 
-  <!-- Evitar FOUC del tema: establece dark/light antes del primer paint -->
+  <!-- Prevent theme flash -->
   <script>
-    (function() {
+    (function () {
       try {
-        const saved = localStorage.getItem('theme'); // 'dark' | 'light' | null
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const dark = saved ? saved === 'dark' : prefersDark;
+        const s = localStorage.getItem('theme');
+        const dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (dark) document.documentElement.classList.add('dark');
-      } catch (_) {}
+      } catch(_) {}
     })();
   </script>
 
-  <!-- TailwindCSS CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // (opcional) configurar Tailwind si lo necesitas
-    tailwind.config = { darkMode: 'class' };
-  </script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
 
-  <!-- CSS propio -->
-  <link rel="stylesheet" href="./css/style.css">
- 
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Favicon (opcional) -->
-  <link rel="icon" href="/favicon.ico">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css?v=1" />
 </head>
 
 <body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-[Inter]">
-  <!-- Navbar mínima con IDs para el JS -->
-  <header class="border-b border-slate-200/60 dark:border-slate-700/60">
+  <!-- Header -->
+  <header class="nav-blur border-b border-slate-200/60 dark:border-slate-700/60 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#" class="font-extrabold text-lg">Mi Portafolio</a>
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-lg">
+        <img src="assets/logo.png" alt="Logo" class="w-6 h-6 rounded" onerror="this.style.display='none'">
+        Daniel · Data
+      </a>
 
-      <nav id="mobileMenu" class="hidden md:flex gap-4">
-        <a href="#proyectos" class="hover:underline">Proyectos</a>
-        <a href="#sobre-mi" class="hover:underline">Sobre mí</a>
-        <a href="#contacto" class="hover:underline">Contacto</a>
+      <nav id="mobileMenu" class="hidden md:flex items-center gap-6">
+        <a href="projects.html" class="link">Projects</a>
+        <a href="resume.html" class="link">Resume</a>
+        <a href="certifications.html" class="link">Certifications</a>
       </nav>
 
       <div class="flex items-center gap-2">
-        <!-- Botón tema -->
         <button id="themeBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60">
-          <span id="sun" aria-hidden="true" class="hidden">🌞</span>
-          <span id="moon" aria-hidden="true" class="">🌙</span>
-          <span class="sr-only">Cambiar tema</span>
+          <span id="sun" class="hidden" aria-hidden="true">🌞</span>
+          <span id="moon" aria-hidden="true">🌙</span>
+          <span class="sr-only">Toggle theme</span>
         </button>
-
-        <!-- Botón menú móvil -->
-        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60 md:hidden" aria-label="Abrir menú" aria-expanded="false">
+        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60 md:hidden" aria-label="Open menu" aria-expanded="false">
           ☰
         </button>
       </div>
     </div>
 
-    <!-- Menú móvil desplegable -->
-    <div class="md:hidden">
-      <nav class="px-4 pb-3">
-        <ul class="space-y-2">
-          <li><a href="#proyectos" class="block py-2">Proyectos</a></li>
-          <li><a href="#sobre-mi" class="block py-2">Sobre mí</a></li>
-          <li><a href="#contacto" class="block py-2">Contacto</a></li>
-        </ul>
+    <!-- mobile dropdown -->
+    <div class="md:hidden hidden" id="mobileDropdown">
+      <nav class="px-4 pb-3 flex flex-col gap-2">
+        <a href="projects.html" class="py-1">Projects</a>
+        <a href="resume.html" class="py-1">Resume</a>
+        <a href="certifications.html" class="py-1">Certifications</a>
       </nav>
     </div>
   </header>
 
-  <!-- Contenido -->
-  <main class="max-w-6xl mx-auto px-4">
-    <h1 class="text-3xl font-extrabold text-center mt-10">¡Mi portafolio funciona!</h1>
-    <!-- Aquí va tu HTML real (hero, secciones, etc.) -->
-  </main>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-20 dark:opacity-30 pointer-events-none"
+         style="background: radial-gradient(600px 300px at 20% 0%, var(--accent) 0%, transparent 60%),
+                         radial-gradient(600px 300px at 80% 20%, #38bdf8 0%, transparent 60%);"></div>
+    <div class="max-w-6xl mx-auto px-4 py-24 md:py-28 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+          Turning raw data into decisions.
+        </h1>
+        <p class="mt-4 text-lg opacity-90">
+          I build end-to-end analytics: data pipelines, dashboards, and ML-assisted insights that drive measurable impact.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="projects.html" class="inline-flex items-center px-4 py-2 rounded-xl bg-[var(--accent)] text-white shadow-soft">View Projects</a>
+          <a href="resume.html" class="inline-flex items-center px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Resume</a>
+        </div>
+        <div class="mt-6 flex gap-2">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Dashboards</span>
+        </div>
+      </div>
+      <div class="card shadow-soft p-6 bg-white/50 dark:bg-slate-800/50">
+        <h3 class="font-bold text-xl">Featured highlights</h3>
+        <ul class="mt-4 space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="mt-1">📈</span>
+            <div><b>Revenue Forecasting</b> — ARIMA + feature engineering; +7.8% MAPE improvement.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1">⚙️</span>
+            <div><b>ETL Modernization</b> — Airflow + DBT; cut refresh time from hours to minutes.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1">📊</span>
+            <div><b>Executive KPI Suite</b> — Power BI dashboards used by leadership weekly.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer con año -->
-  <footer class="max-w-6xl mx-auto px-4 py-10 text-center opacity-80">
-    <small>&copy; <span id="y"></span> Daniel Cortes. Todos los derechos reservados.</small>
+  <!-- Teasers -->
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-2xl font-bold">Latest projects</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card -->
+      <a href="projects.html#p1" class="card shadow-soft overflow-hidden block group bg-white/60 dark:bg-slate-800/60">
+        <img src="assets/project-1.jpg" alt="Project 1" class="w-full h-40 object-cover group-hover:scale-[1.02] transition"
+             onerror="this.src='https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1200&auto=format&fit=crop'">
+        <div class="p-4">
+          <h3 class="font-semibold">Customer Churn Analysis</h3>
+          <p class="opacity-80 text-sm mt-1">Cohort analysis + XGBoost to predict churn and target at-risk users.</p>
+        </div>
+      </a>
+      <a href="projects.html#p2" class="card shadow-soft overflow-hidden block group bg-white/60 dark:bg-slate-800/60">
+        <img src="assets/project-2.jpg" alt="Project 2" class="w-full h-40 object-cover group-hover:scale-[1.02] transition"
+             onerror="this.src='https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1200&auto=format&fit=crop'">
+        <div class="p-4">
+          <h3 class="font-semibold">Sales Forecasting</h3>
+          <p class="opacity-80 text-sm mt-1">Hierarchical time series forecasting across regions and SKUs.</p>
+        </div>
+      </a>
+      <a href="projects.html#p3" class="card shadow-soft overflow-hidden block group bg-white/60 dark:bg-slate-800/60">
+        <img src="assets/project-3.jpg" alt="Project 3" class="w-full h-40 object-cover group-hover:scale-[1.02] transition"
+             onerror="this.src='https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1200&auto=format&fit=crop'">
+        <div class="p-4">
+          <h3 class="font-semibold">Pricing Optimization</h3>
+          <p class="opacity-80 text-sm mt-1">Elasticity modeling to recommend price changes and lift margin.</p>
+        </div>
+      </a>
+    </div>
+    <div class="mt-6">
+      <a href="projects.html" class="link">See all projects →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto px-4 py-12 text-center opacity-80">
+    <small>© <span id="y"></span> Daniel Cortes. All rights reserved.</small>
   </footer>
 
-  <!-- JS propio -->
-  <script src="./js/main.js" defer></script>
+  <script src="js/main.js?v=1" defer></script>
 </body>
 </html>
