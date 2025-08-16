@@ -41,6 +41,32 @@
     <h1 class="text-3xl font-extrabold">Projects</h1>
     <p class="mt-2 opacity-80">A selection of end-to-end analytics, modeling, dashboards and experiments.</p>
 
+<!-- Preview Modal (green theme) -->
+<div id="previewModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" data-close-modal></div>
+
+  <div class="modal-panel">
+    <button class="modal-close" type="button" aria-label="Close" data-close-modal>✕</button>
+
+    <header class="text-center">
+      <h3 class="text-lg font-bold">Atlantic Puffin (Fratercula arctica)</h3>
+      <p class="text-sm opacity-85 mt-1">Quick preview — click the capsule to open the project.</p>
+    </header>
+
+    <!-- cápsula verde (clic) -->
+    <a href="project-puffin.html" class="capsule-green mt-4 block" aria-label="Open project">
+      <img src="assets/puffin.jpg" alt="Atlantic Puffin" />
+    </a>
+
+    <div class="mt-4 text-center">
+      <a href="project-puffin.html"
+        class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white shadow-soft">Open project</a>
+    </div>
+  </div>
+</div>
+
+
+
     <!-- Carousel -->
     <section id="projectCarousel" class="mt-8">
       <div class="relative card shadow-soft p-2 bg-white/50 dark:bg-slate-800/50 overflow-hidden">
@@ -48,33 +74,34 @@
       
         <!-- Slide 1 -->
         <article id="p1" class="min-w-full grid md:grid-cols-2 gap-4 p-4 relative group">
-          <!-- enlace que hace clic en TODO el slide -->
-          <a href="project-puffin.html" class="stretched-link" aria-label="Open project: Atlantic Puffin Flight Analysis"></a>
+          <!-- enlace que abre el modal (fallback: si no hay JS, navega a la página) -->
+          <a href="project-puffin.html" class="stretched-link preview-modal-trigger"
+            aria-label="Open preview: Atlantic Puffin"></a>
         
-          <img src="assets/project-1.jpg" alt="Churn Analysis" class="w-full h-60 object-cover rounded-xl"
+          <img src="assets/project-1.jpg" alt="Atlantic Puffin" class="w-full h-60 object-cover rounded-xl"
             onerror="this.src='assets/puffin.jpg'">
         
           <div>
             <h3 class="text-xl font-bold">Atlantic Puffin · Flight Analysis</h3>
             <p class="mt-2 opacity-90">
-              Species-focused analytics: tracking flights, distances and seasonal activity for
-              the Atlantic Puffin (Fratercula arctica).
+              Quick species preview and a colorful dashboard about puffin flight activity.
             </p>
             <ul class="mt-3 flex flex-wrap gap-2">
-              <li class="tag">Python</li>
-              <li class="tag">Geo/Time Series</li>
+              <li class="tag">Species</li>
+              <li class="tag">Time Series</li>
               <li class="tag">Dashboard</li>
-              <li class="tag">Charts</li>
             </ul>
             <div class="mt-4 flex gap-3">
-              <a href="project-puffin.html" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Open
-                Project</a>
-              <a href="project-puffin.html#dashboard"
-                class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Go to Dashboard</a>
+              <a href="project-puffin.html#dashboard" class="inline-flex px-4 py-2 rounded-xl bg-[var(--accent)] text-white">Go
+                to Dashboard</a>
+              <a href="project-puffin.html"
+                class="inline-flex px-4 py-2 rounded-xl border border-slate-300/60 dark:border-slate-700/60">Full project</a>
             </div>
           </div>
         </article>
-          
+
+
+
           <!-- Slide 2 -->
           <article id="p2" class="min-w-full grid md:grid-cols-2 gap-4 p-4">
             <img src="assets/project-2.jpg" alt="Sales Forecasting" class="w-full h-60 object-cover rounded-xl"

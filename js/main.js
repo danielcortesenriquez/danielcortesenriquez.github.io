@@ -1,6 +1,31 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+// —— Preview modal (projects → slide 1) ——
+const previewModal = document.getElementById('previewModal');
+const openers = document.querySelectorAll('.preview-modal-trigger');
+
+function openModal(e) {
+  if (e) e.preventDefault(); // evita navegar; usamos el modal
+  if (!previewModal) return;
+  previewModal.classList.remove('hidden');
+  previewModal.setAttribute('aria-hidden', 'false');
+  // cerrar con ESC
+  const onEsc = (ev) => { if (ev.key === 'Escape') closeModal(); };
+  document.addEventListener('keydown', onEsc, { once: true });
+}
+
+function closeModal() {
+  previewModal?.classList.add('hidden');
+  previewModal?.setAttribute('aria-hidden', 'true');
+}
+
+openers.forEach(btn => btn.addEventListener('click', openModal));
+previewModal?.querySelectorAll('[data-close-modal]').forEach(el => {
+  el.addEventListener('click', closeModal);
+});
+
+
   // Safe storage helpers
   const storage = {
     get(k) { try { return localStorage.getItem(k); } catch { return null; } },

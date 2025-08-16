@@ -119,70 +119,80 @@
 
   <!-- Chart.js solo en esta página -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script>
-    // ---------- Sample data (cámbialo por tus datos reales) ----------
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    // vuelos/mes (ejemplo)
-    const flightsMonthly = [12,18,22,35,60,90,110,95,70,40,20,14];
-    // distancias en km (ejemplo por bucket)
-    const distBuckets = { '<10km': 32, '10–30km': 58, '30–60km': 44, '>60km': 12 };
+<script>
 
-    // KPIs
-    const totalFlights = flightsMonthly.reduce((a,b)=>a+b,0);
-    const avgDist = (10*32 + 20*58 + 45*44 + 70*12) // estimación media por bucket
-    const totalDist = Math.round(avgDist);
-    const peakIndex = flightsMonthly.indexOf(Math.max(...flightsMonthly));
-    document.getElementById('kpiFlights').textContent = totalFlights.toLocaleString();
-    document.getElementById('kpiDistance').textContent = totalDist.toLocaleString();
-    document.getElementById('kpiPeak').textContent = months[peakIndex];
+  // ---------- Sample data (reemplaza por tus datos reales) ----------
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const flightsMonthly = [12,18,22,35,60,90,110,95,70,40,20,14];
+  const distBuckets = { '<10km': 32, '10–30km': 58, '30–60km': 44, '>60km': 12 };
 
-    // Paleta puffin
-    const cOrange = '#f97316';
-    const cOcean  = '#0ea5e9';
-    const cDark   = '#0f172a';
-    const cGreen  = '#16a34a';
+  // KPIs
+  const totalFlights = flightsMonthly.reduce((a,b)=>a+b,0);
+  const totalDist = Math.round(10*32 + 20*58 + 45*44 + 70*12); // estimación rápida
+  const peakIndex = flightsMonthly.indexOf(Math.max(...flightsMonthly));
+  document.getElementById('kpiFlights').textContent = totalFlights.toLocaleString();
+  document.getElementById('kpiDistance').textContent = totalDist.toLocaleString();
+  document.getElementById('kpiPeak').textContent = months[peakIndex];
 
-    // Chart defaults
-    Chart.defaults.font.family = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, sans-serif';
-    Chart.defaults.color = getComputedStyle(document.documentElement).classList.contains('dark') ? '#e5e7eb' : '#0f172a';
+  // Paleta (verde + azul + naranja) inspirada en tus imágenes
+  const cGreen  = '#22c55e'; // verde vivo
+  const cOcean  = '#0ea5e9'; // azul océano
+  const cOrange = '#f97316'; // naranja pico
+  const cMoss   = '#16a34a'; // musgo
+  const cDeep   = '#0f172a'; // fondo oscuro
 
-    // Line: flights per month
-    new Chart(document.getElementById('chartFlights'), {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [{
-          label: 'Flights',
-          data: flightsMonthly,
-          borderColor: cOrange,
-          backgroundColor: 'rgba(249, 115, 22, .15)',
-          tension: .35,
-          fill: true
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false } },
-          y: { grid: { color: 'rgba(15, 23, 42, .1)' }, beginAtZero: true }
-        }
+  Chart.defaults.font.family = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, sans-serif';
+  Chart.defaults.color = getComputedStyle(document.documentElement).classList.contains('dark') ? '#e5e7eb' : '#0f172a';
+
+  // Gradiente para el área
+  function makeGradient(ctx, from, to) {
+    const g = ctx.createLinearGradient(0, 0, 0, 240);
+    g.addColorStop(0, from);
+    g.addColorStop(1, to);
+    return g;
+  }
+
+  // Linea: vuelos por mes
+  const ctxLine = document.getElementById('chartFlights').getContext('2d');
+  new Chart(ctxLine, {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Flights',
+        data: flightsMonthly,
+        borderColor: cGreen,
+        pointBackgroundColor: cOrange,
+        pointRadius: 3,
+        tension: .35,
+        fill: true,
+        backgroundColor: makeGradient(ctxLine, 'rgba(34,197,94,.35)', 'rgba(34,197,94,.05)')
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: 'rgba(15,23,42,.1)' }, beginAtZero: true }
       }
-    });
+    }
+  });
 
-    // Doughnut: distance buckets
-    new Chart(document.getElementById('chartDistance'), {
-      type: 'doughnut',
-      data: {
-        labels: Object.keys(distBuckets),
-        datasets: [{
-          data: Object.values(distBuckets),
-          backgroundColor: [cOrange, cOcean, cGreen, cDark],
-          borderWidth: 0
-        }]
-      },
-      options: { plugins: { legend: { position: 'bottom' } }, cutout: '60%' }
-    });
-  </script>
+  // Doughnut: distancia por buckets
+  new Chart(document.getElementById('chartDistance'), {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(distBuckets),
+      datasets: [{
+        data: Object.values(distBuckets),
+        backgroundColor: [cGreen, cOcean, cOrange, cDeep],
+        borderWidth: 0
+      }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } }, cutout: '58%' }
+  });
+</script>
+
 
   <script src="js/main.js" defer></script>
 </body>
