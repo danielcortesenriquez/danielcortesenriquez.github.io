@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mi Portafolio de Ciencia de Datos</title>
   <meta name="description" content="Portafolio de Ciencia de Datos: proyectos, dashboards y demos interactivos." />
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Evitar FOUC del tema: establece dark/light antes del primer paint -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('theme'); // 'dark' | 'light' | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const dark = saved ? saved === 'dark' : prefersDark;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (_) {}
+    })();
+  </script>
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // (opcional) configurar Tailwind si lo necesitas
+    tailwind.config = { darkMode: 'class' };
+  </script>
 
   <!-- CSS propio -->
   <link rel="stylesheet" href="./css/style.css">
@@ -16,16 +33,62 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="/favicon.ico">
 </head>
 
-<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-[Inter]">
+  <!-- Navbar mínima con IDs para el JS -->
+  <header class="border-b border-slate-200/60 dark:border-slate-700/60">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="font-extrabold text-lg">Mi Portafolio</a>
 
-  <!-- Contenido de prueba -->
-  <h1 class="text-3xl font-bold text-center mt-10">¡Mi portafolio funciona!</h1>
+      <nav id="mobileMenu" class="hidden md:flex gap-4">
+        <a href="#proyectos" class="hover:underline">Proyectos</a>
+        <a href="#sobre-mi" class="hover:underline">Sobre mí</a>
+        <a href="#contacto" class="hover:underline">Contacto</a>
+      </nav>
 
-  <!-- Aquí va tu HTML real (navbar, hero, secciones, footer) -->
+      <div class="flex items-center gap-2">
+        <!-- Botón tema -->
+        <button id="themeBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60">
+          <span id="sun" aria-hidden="true" class="hidden">🌞</span>
+          <span id="moon" aria-hidden="true" class="">🌙</span>
+          <span class="sr-only">Cambiar tema</span>
+        </button>
+
+        <!-- Botón menú móvil -->
+        <button id="menuBtn" class="p-2 rounded-lg border border-slate-300/60 dark:border-slate-700/60 md:hidden" aria-label="Abrir menú" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú móvil desplegable -->
+    <div class="md:hidden">
+      <nav class="px-4 pb-3">
+        <ul class="space-y-2">
+          <li><a href="#proyectos" class="block py-2">Proyectos</a></li>
+          <li><a href="#sobre-mi" class="block py-2">Sobre mí</a></li>
+          <li><a href="#contacto" class="block py-2">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido -->
+  <main class="max-w-6xl mx-auto px-4">
+    <h1 class="text-3xl font-extrabold text-center mt-10">¡Mi portafolio funciona!</h1>
+    <!-- Aquí va tu HTML real (hero, secciones, etc.) -->
+  </main>
+
+  <!-- Footer con año -->
+  <footer class="max-w-6xl mx-auto px-4 py-10 text-center opacity-80">
+    <small>&copy; <span id="y"></span> Daniel Cortes. Todos los derechos reservados.</small>
+  </footer>
 
   <!-- JS propio -->
-  <script src="./js/main.js"></script>
-</body>  
+  <script src="./js/main.js" defer></script>
+</body>
 </html>
